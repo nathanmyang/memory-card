@@ -1,4 +1,8 @@
-// import { useState } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Board from './components/Board.jsx';
+// import Card from './components/Card.jsx';
+import Scoreboard from './components/Scoreboard.jsx';
 
 /*
 • Your application should include a scoreboard, which counts the current score, and a “Best Score”, which shows the highest score you’ve achieved thus far. 
@@ -28,21 +32,47 @@ useEffect
 
 Functions needed
 - onClick(card)
-  - If card hasn't been previously picked (not in cards state arr)
+  - If card hasn't been previously picked (not in selectedCards state arr)
     - add card (cardId?) to selectedCards
     - increment score
     - if score is greater than bestScore, reassign bestScore to score
     - randomize order of cards in cards
   - If card has been picked (in card state arr)
     - reset score to 0
-  - If score is equal to 12 (or max score)
-    - display win screen
 
 */
+
 function App() {
+	const [score, setScore] = useState(0);
+	const [bestScore, setBestScore] = useState(0);
+	const [cards, setCards] = useState([]);
+	const [selectedCardIds, setSelectedCardIds] = useState([]);
+
+	useEffect(() => {
+		fetch(
+			'https://api.thecatapi.com/v1/images/search?limit=15&api_key=live_g39u0sKEyFkWAMiW54U7CtWb3v81pkuWAhIXUfbPA1g19r2r0n7VFA21j9MsDHDy'
+		)
+			.then((res) => {
+				return res.json();
+			})
+			.then((data) => {
+				const filteredData = data.map((data) => {
+					return { id: data.id, url: data.url };
+				});
+				setCards(filteredData);
+			});
+	}, [selectedCardIds]);
+
 	return (
 		<>
-			<h1>Hello World</h1>
+			<Scoreboard score={score} bestScore={bestScore} />
+			<Board
+				cards={cards}
+				// selectedCardIds={selectedCardIds}
+				// setSelectedCardIds={setSelectedCardIds}
+				setBestScore={setBestScore}
+				setScore={setScore}
+			/>
 		</>
 	);
 }

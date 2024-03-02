@@ -1,7 +1,13 @@
-export default function Card({ card }) {
+import '../styles/Card.css';
+
+export default function Card({ card, selectCard }) {
 	return (
 		<div>
-			<img src={card.url}></img>
+			<img
+				onClick={() => selectCard(card)}
+				className='img'
+				src={card.url}
+			></img>
 		</div>
 	);
 }

@@ -1,4 +1,6 @@
-export default function Scoreboard({ score, bestScore }) {
+import PropTypes from 'prop-types';
+
+function Scoreboard({ score, bestScore }) {
 	return (
 		<div>
 			<h1>Cat Memory Game</h1>
@@ -11,3 +13,10 @@ export default function Scoreboard({ score, bestScore }) {
 		</div>
 	);
 }
+
+Scoreboard.propTypes = {
+	score: PropTypes.num,
+	bestScore: PropTypes.num,
+};
+
+export default Scoreboard;

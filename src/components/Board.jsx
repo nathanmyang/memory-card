@@ -1,7 +1,8 @@
 import '../styles/Board.css';
 import Card from './Card.jsx';
+import PropTypes from 'prop-types';
 
-export default function Board({ cards, selectCard }) {
+function Board({ cards, selectCard }) {
 	return (
 		<div id='board'>
 			{cards.map((card) => {
@@ -12,3 +13,10 @@ export default function Board({ cards, selectCard }) {
 		</div>
 	);
 }
+
+Board.propTypes = {
+	cards: PropTypes.array,
+	selectCard: PropTypes.func,
+};
+
+export default Board;

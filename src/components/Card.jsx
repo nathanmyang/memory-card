@@ -1,6 +1,7 @@
 import '../styles/Card.css';
+import PropTypes from 'prop-types';
 
-export default function Card({ card, selectCard }) {
+function Card({ card, selectCard }) {
 	return (
 		<div>
 			<img
@@ -11,3 +12,10 @@ export default function Card({ card, selectCard }) {
 		</div>
 	);
 }
+
+Card.propTypes = {
+	card: PropTypes.object,
+	selectCard: PropTypes.func,
+};
+
+export default Card;
